@@ -64,13 +64,13 @@ Canada Map integrated from published ArcGIS online Canada Map by Alex Quantz
         zoom: 3
       });
 
-      // Define a pop-up for Trailheads
+      // Define a pop-up for the Canadian Provinces
       const popupProvince = {
         "title": "Province",
         "content": "<b>Province Name:</b> {PRENAME}"
       }
 
-      // Add parks with a class breaks renderer and unique symbols
+      // Add class breaks renderer and unique colours to Province fields
       function createFillSymbol(value, color) {
         return {
           "value": value,
