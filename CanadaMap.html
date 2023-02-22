@@ -69,19 +69,46 @@ Canada Map integrated from published ArcGIS online Canada Map by Alex Quantz
         "content": "<b>Province Name:</b> {PRENAME}"
       }
 
-      const ProvCol = {
-            type: "simple",
-            symbol: {
-                color: "#FF0000",
-                type: "simple-fill"
+      // Add parks with a class breaks renderer and unique symbols
+      function createFillSymbol(value, color) {
+        return {
+          "value": value,
+          "symbol": {
+            "color": color,
+            "type": "simple-fill",
+            "style": "solid",
+            "outline": {
+              "style": "none"
             }
+          },
+          "label": value
         };
+      }  
+      const openCanadaRenderer = {
+        type: "unique-value",
+        field: "PRENAME",
+        uniqueValueInfos: [
+          createFillSymbol("Alberta", "#e60049"),
+          createFillSymbol("British Columbia", "#0bb4ff"),
+          createFillSymbol("Manitoba", "#e950b2"),
+          createFillSymbol("New Brunswick", "#f5db69"),
+          createFillSymbol("Newfoundland and Labrador", "#ac52eb"),
+          createFillSymbol("Northwest Territories", "#ffa300"),
+          createFillSymbol("Nova Scotia", "#dc0ab4"),
+          createFillSymbol("Ontario", "#00bfa0"),
+          createFillSymbol("Nunavut", "#0a8a2c"),
+          createFillSymbol("Prince Edward Island", "#2e2ff2"),
+          createFillSymbol("Quebec", "#e60049"),
+          createFillSymbol("Saskatchewan", "#5a0bff"),
+          createFillSymbol("Yukon", "#50e991")
+        ]
+      };
     const Provinces = new FeatureLayer({
         url: "https://utility.arcgis.com/usrsvcs/servers/8d24031179af4062b1e74f2bd63114b0/rest/services/geom99wed/aquantzCanadaMap/MapServer/0",
         outFields: ["PRENAME"],
         popupTemplate: popupProvince,
-        renderer: ProvCol,
-        opacity: 80
+        renderer: openCanadaRenderer,
+        opacity: 20
       });
 
       map.add(Provinces);
